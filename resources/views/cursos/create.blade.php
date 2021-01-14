@@ -3,7 +3,7 @@
 @section('title', 'Create')
 @section('content')
     <h1>En esta pagina podras Crear el curso</h1>
-    <form action="{{route('curso.save')}}" method="POST">
+    <form action="{{route('cursos.store')}}" method="POST">
 
         @csrf
 

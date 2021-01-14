@@ -20,25 +20,30 @@ class CursoController extends Controller
         return view('cursos/create');
     }
 
-    public function save(StoreCurso $request)
+    public function store(StoreCurso $request)
     {
+        // $curso = new Curso();
+        // $curso->name = $request->name;
+        // $curso->description = $request->description;
+        // $curso->category = $request->category;
 
-        $curso = new Curso();
-        $curso->name = $request->name;
-        $curso->description = $request->description;
-        $curso->category = $request->category;
+        // $curso->save();
 
-        $curso->save();
-
-        return redirect()->route('cursos.show', $curso);
+        // Verificar porque de esta forma no me funciona
+        $curso = Curso::create($request->all());
+        
+        return redirect()->route('cursos.show', compact('curso'));
     }
 
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $curso = Curso::find($id);
+    //     return view('cursos/show', ['curso' => $curso]);
+    // }
+    public function show(Curso $curso)
     {
-        $curso = Curso::find($id);
-        return view('cursos/show', ['curso' => $curso]);
-        //return view('cursos/show', compact($curso));
-    }
+        return view('cursos/show', compact('curso'));
+    }    
 
     public function edit2($id)
     {
@@ -51,19 +56,21 @@ class CursoController extends Controller
         return view('cursos.edit',  compact('curso'));
     }    
 
-    public function update(Request $request, Curso $curso)
+    public function update(StoreCurso $request, Curso $curso)
     {
-        $request->validate([
-            'name' => 'required|max:10',
-            'description' => 'required|min:20',
-            'category' => 'required'
-        ]);
+        // $curso->name = $request->name;
+        // $curso->description = $request->description;
+        // $curso->category = $request->category;
+        // $curso->save();
 
-        $curso->name = $request->name;
-        $curso->description = $request->description;
-        $curso->category = $request->category;
-        $curso->save();
+        $curso->update($request->all());
 
         return redirect()->route('cursos.show', $curso);
+    }
+
+    public function destroy(Curso $curso)
+    {
+        $curso->delete();
+        return redirect()->route('cursos.index');
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CursoController;
+use Illuminate\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,20 @@ use App\Http\Controllers\CursoController;
 
 Route::get('/', HomeController::class);
 
-Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
+// Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
 
-Route::get('cursos/create', [CursoController::class, 'create'])->name('cursos.create');
-Route::post('curso', [CursoController::class, 'save'])->name('curso.save');
+// Route::get('cursos/create', [CursoController::class, 'create'])->name('cursos.create');
+// Route::post('cursos', [CursoController::class, 'save'])->name('cursos.save');
 
-Route::get('cursos/{id}', [CursoController::class, 'show'])->name('cursos.show');
-Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
-Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
+// Route::get('cursos/{id}', [CursoController::class, 'show'])->name('cursos.show');
+// Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
+// Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
 
+// Route::delete('cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy');
+
+
+Route::resource('cursos', CursoController::class);
+
+// Esto aplica para el caso que me pida cambiar el nombre
+// de la URL y ya el proyecto esta terminado
+//Route::resource('asignaturas', CursoController::class)->parameters(['asignaturas' => 'curso'])->names('cursos');
